@@ -1,0 +1,10 @@
+# save dotfiles commands
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+
+alias ls='ls --color=auto'
+alias v="nvim"
+alias fbuild="flutter build apk --release"
+
+# easier to read disk
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
