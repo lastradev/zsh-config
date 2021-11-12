@@ -30,6 +30,7 @@ source "$ZDOTDIR/zsh-functions"
 zsh_add_file "dracula-theme"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
+zsh_add_file "zsh-credentials"
 zsh_add_file "zsh-prompt"
 
 # Plugins
