@@ -27,7 +27,7 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
-zsh_add_file "dracula-theme"
+zsh_add_file "zsh-one-dark-theme"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-credentials"
@@ -39,13 +39,31 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 
 # Key-bindings
-bindkey -s '^o' 'ranger^M'
 #bindkey '^ ' autosuggest-accept
+
+# lf with ctrl + o
+bindkey -s '^o' 'lfcd\n'
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
 
 compinit
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+CASE_SENSITIVE="true"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

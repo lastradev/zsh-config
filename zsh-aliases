@@ -1,12 +1,26 @@
 # save dotfiles commands
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
 
-alias ls='ls --color=auto'
+alias ls='exa --icons'
 alias v="nvim"
+alias vim="nvim"
 alias fb="flutter build apk --release"
 alias fr="flutter run"
-alias syu="sudo pacman -Syu"
 
 # easier to read disk
-alias df='df -h'     # human-readable sizes
-alias free='free -m' # show sizes in MB
+# alias df='df -h | lolcat'     # human-readable sizes
+alias free='free -m | lolcat' # show sizes in MB
+
+# ssh session
+# stops asking ssh paraphrase
+alias sesh='eval $(ssh-agent) && ssh-add'
+
+alias g='git'
+
+alias ll='exa -la --git --icons'
+
+# grep color
+alias grep='grep --color=auto'
+
+# lf
+alias lf='lfub'
