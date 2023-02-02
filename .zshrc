@@ -1,8 +1,9 @@
 #!/bin/sh
-HISTFILE=/zsh/.zsh_history
+HISTFILE=$ZDOTDIR/.zsh_history
 setopt appendhistory
 
 # some useful options (man zshoptions)
+setopt vi
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
 stty stop undef		# Disable ctrl-s to freeze terminal.
@@ -27,7 +28,7 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
-zsh_add_file "zsh-one-dark-theme"
+zsh_add_file "zsh-catppuccin-macchiato"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-credentials"
@@ -58,6 +59,22 @@ lfcd () {
     fi
 }
 
+function countdown(){
+   date1=$((`date +%s` + $1)); 
+   while [ "$date1" -ge `date +%s` ]; do 
+     echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+     sleep 0.1
+   done
+}
+
+function stopwatch(){
+  date1=`date +%s`; 
+   while true; do 
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+    sleep 0.1
+   done
+}
+
 compinit
 
 # Edit line in vim with ctrl-e:
@@ -67,3 +84,6 @@ bindkey '^e' edit-command-line
 CASE_SENSITIVE="true"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Rbenv
+eval "$(rbenv init - zsh)"
